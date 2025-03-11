@@ -1,0 +1,1 @@
+"""Calculator to determine user's BMI and nutritional requirements from their height and weight."""
