@@ -17,7 +17,7 @@ def calculate_total_calories(bmr, activity_level):
         5: 1.9
     }
     
-    return bmr * activity_multipliers.get(activity_level, 1.2)
+    return round(bmr * activity_multipliers.get(activity_level, 1.2), -2)
 
 def get_valid_input(prompt, valid_options=None, value_type=str, condition=None):
     while True:
@@ -105,17 +105,17 @@ def main():
         print("Invalid gender input.")
     else:
         total_calories = calculate_total_calories(bmr, activity_level)
-        print(f"Your BMR is: {bmr:.2f} kcal/day")
-        print(f"Your total daily calorie needs are: {total_calories:.2f} kcal/day")
+        print(f"Your BMR is: {round(bmr, -2)} kcal/day")
+        print(f"Your total daily calorie needs are: {total_calories} kcal/day")
         
         if goal == 2:  # Weight loss
-            calorie_deficits = {1: 275, 2: 550, 3: 1100}
+            calorie_deficits = {1: 300, 2: 500, 3: 1100}
             total_calories -= calorie_deficits.get(weight_change, 0)
-            print(f"To lose weight, you should consume around {total_calories:.2f} kcal/day.")
+            print(f"To lose weight, you should consume around {round(total_calories, -2)} kcal/day.")
         elif goal == 3:  # Weight gain
-            calorie_surpluses = {1: 275, 2: 550, 3: 1100}
+            calorie_surpluses = {1: 300, 2: 500, 3: 1100}
             total_calories += calorie_surpluses.get(weight_change, 0)
-            print(f"To gain weight, you should consume around {total_calories:.2f} kcal/day.")
+            print(f"To gain weight, you should consume around {round(total_calories, -2)} kcal/day.")
 
 if __name__ == "__main__":
     main()
