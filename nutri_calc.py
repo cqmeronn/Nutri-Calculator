@@ -36,11 +36,25 @@ def get_valid_input(prompt, valid_options=None, value_type=str, condition=None):
 def is_positive(value):
     return value > 0
 
+def convert_to_metric(weight, height, weight_unit, height_unit):
+    if weight_unit == 'lbs':
+        weight = weight * 0.453592
+    if height_unit == 'inches':
+        height = height * 2.54
+    return weight, height
+
 def get_user_inputs():
+    unit_system = get_valid_input("Choose unit system (metric/imperial): ", ['metric', 'imperial'])
+    weight_unit = 'kg' if unit_system == 'metric' else 'lbs'
+    height_unit = 'cm' if unit_system == 'metric' else 'inches'
+    
     gender = get_valid_input("Enter gender (male/female): ", ['male', 'female'])
-    weight = get_valid_input("Enter weight (kg): ", value_type=float, condition=is_positive)
-    height = get_valid_input("Enter height (cm): ", value_type=float, condition=is_positive)
+    weight = get_valid_input(f"Enter weight ({weight_unit}): ", value_type=float, condition=is_positive)
+    height = get_valid_input(f"Enter height ({height_unit}): ", value_type=float, condition=is_positive)
     age = get_valid_input("Enter age (years): ", value_type=int, condition=is_positive)
+    
+    if unit_system == 'imperial':
+        weight, height = convert_to_metric(weight, height, weight_unit, height_unit)
     
     activity_levels = {
         1: "Little/no exercise",
@@ -71,9 +85,9 @@ def get_user_inputs():
     weight_change = None
     if goal in [2, 3]:
         weight_change_options = {
-            1: "0.25 kg/week (mild change)",
-            2: "0.5 kg/week (moderate change)",
-            3: "1 kg/week (aggressive change)"
+            1: "0.25 kg (0.5 lbs)/week (mild change)",
+            2: "0.5 kg (1 lbs)/week (moderate change)",
+            3: "1 kg (2.2 lbs)/week (aggressive change)"
         }
         
         print(f"Select your weight {'loss' if goal == 2 else 'gain'} goal:")
