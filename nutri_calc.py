@@ -42,19 +42,50 @@ def get_user_inputs():
     height = get_valid_input("Enter height (cm): ", value_type=float, condition=is_positive)
     age = get_valid_input("Enter age (years): ", value_type=int, condition=is_positive)
     
+    activity_levels = {
+        1: "Little/no exercise",
+        2: "Light exercise",
+        3: "Moderate exercise (3-5 days/wk)",
+        4: "Very active (6-7 days/wk)",
+        5: "Extra active (very active & physical job)"
+    }
+    
     print("Enter activity level:")
-    print("1 - Little/no exercise")
-    print("2 - Light exercise")
-    print("3 - Moderate exercise (3-5 days/wk)")
-    print("4 - Very active (6-7 days/wk)")
-    print("5 - Extra active (very active & physical job)")
+    for key, value in activity_levels.items():
+        print(f"{key} - {value}")
     
-    activity_level = get_valid_input("Choose a number (1-5): ", [1, 2, 3, 4, 5], value_type=int)
+    activity_level = get_valid_input("Choose a number (1-5): ", list(activity_levels.keys()), value_type=int)
     
-    return gender, weight, height, age, activity_level
+    goals = {
+        1: "Maintain weight",
+        2: "Lose weight",
+        3: "Gain weight"
+    }
+    
+    print("Select your goal:")
+    for key, value in goals.items():
+        print(f"{key} - {value}")
+    
+    goal = get_valid_input("Choose a number (1-3): ", list(goals.keys()), value_type=int)
+    
+    weight_change = None
+    if goal in [2, 3]:
+        weight_change_options = {
+            1: "0.25 kg/week (mild change)",
+            2: "0.5 kg/week (moderate change)",
+            3: "1 kg/week (aggressive change)"
+        }
+        
+        print(f"Select your weight {'loss' if goal == 2 else 'gain'} goal:")
+        for key, value in weight_change_options.items():
+            print(f"{key} - {value}")
+        
+        weight_change = get_valid_input("Choose a number (1-3): ", list(weight_change_options.keys()), value_type=int)
+    
+    return gender, weight, height, age, activity_level, goal, weight_change
 
 def main():
-    gender, weight, height, age, activity_level = get_user_inputs()
+    gender, weight, height, age, activity_level, goal, weight_change = get_user_inputs()
     bmr = calculate_bmr(gender, weight, height, age)
     if bmr is None:
         print("Invalid gender input.")
@@ -62,6 +93,15 @@ def main():
         total_calories = calculate_total_calories(bmr, activity_level)
         print(f"Your BMR is: {bmr:.2f} kcal/day")
         print(f"Your total daily calorie needs are: {total_calories:.2f} kcal/day")
+        
+        if goal == 2:  # Weight loss
+            calorie_deficits = {1: 275, 2: 550, 3: 1100}
+            total_calories -= calorie_deficits.get(weight_change, 0)
+            print(f"To lose weight, you should consume around {total_calories:.2f} kcal/day.")
+        elif goal == 3:  # Weight gain
+            calorie_surpluses = {1: 275, 2: 550, 3: 1100}
+            total_calories += calorie_surpluses.get(weight_change, 0)
+            print(f"To gain weight, you should consume around {total_calories:.2f} kcal/day.")
 
 if __name__ == "__main__":
     main()
