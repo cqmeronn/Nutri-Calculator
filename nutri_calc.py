@@ -106,7 +106,7 @@ def main():
     else:
         total_calories = calculate_total_calories(bmr, activity_level)
         print(f"Your BMR is: {int(round(bmr, -2))} kcal/day")
-        print(f"Your total daily calorie needs are: {total_calories} kcal/day")
+        print(f"Your total daily calorie needs are: {int(round(total_calories, -2))} kcal/day")
         
         if goal == 2:  # Weight loss
             calorie_deficits = {1: 300, 2: 500, 3: 1100}
@@ -115,7 +115,7 @@ def main():
         elif goal == 3:  # Weight gain
             calorie_surpluses = {1: 300, 2: 500, 3: 1100}
             total_calories += calorie_surpluses.get(weight_change, 0)
-            print(f"To gain weight, you should consume around {round(total_calories, -2)} kcal/day.")
+            print(f"To gain weight, you should consume around {int(round(total_calories, -2))} kcal/day.")
 
 if __name__ == "__main__":
     main()
