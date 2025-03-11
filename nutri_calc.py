@@ -19,14 +19,30 @@ def calculate_total_calories(bmr, activity_level):
     
     return bmr * activity_multipliers.get(activity_level.lower(), 1.2)
 
+def convert_to_metric(weight, height, weight_unit, height_unit):
+    if weight_unit.lower() == 'lbs':
+        weight = weight * 0.453592                  # Convert lbs to kg
+    
+    if height_unit.lower() == 'feet and inches':
+        feet = int(input("Enter feet: "))
+        inches = int(input("Enter inches: "))
+        height = (feet * 30.48) + (inches * 2.54)  # Convert feet and inches to cm
+    
+    return weight, height
+
 # User input -- soon to be put into function.
 gender = input("Enter gender (male/female): ")
-weight = float(input("Enter weight (kg): "))
-height = float(input("Enter height (cm): "))
+weight_unit = input("Enter weight unit (kg/lbs): ")
+height_unit = input("Enter height unit (cm/feet and inches): ")
+weight = float(input(f"Enter weight ({weight_unit}): "))
+height = float(input(f"Enter height ({height_unit}): "))
 age = int(input("Enter age (years): "))
 activity_level = input("Enter activity level (little, light, moderate, very active, extra active): ")
 
-# Calculate BMR -- use all detaisl to calculate BMR rounded.
+# Convert to metric if necessary
+weight, height = convert_to_metric(weight, height, weight_unit, height_unit)
+
+# Calculate BMR -- use all details to calculate BMR rounded.
 bmr = calculate_bmr(gender, weight, height, age)
 if bmr is None:
     print("Invalid gender input.")
