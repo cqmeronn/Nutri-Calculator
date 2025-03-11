@@ -19,97 +19,41 @@ def calculate_total_calories(bmr, activity_level):
     
     return bmr * activity_multipliers.get(activity_level.lower(), 1.2)
 
-def convert_to_metric(weight, height, weight_unit, height_unit):
-    weight_unit = weight_unit.lower()
-    height_unit = height_unit.lower()
-    
-    if weight_unit not in ['kg', 'lbs']:
-        raise ValueError("Invalid weight unit. Please enter 'kg' or 'lbs'.")
-    if height_unit not in ['cm', 'feet and inches']:
-        raise ValueError("Invalid height unit. Please enter 'cm' or 'feet and inches'.")
-    
-    if weight_unit == 'lbs':
-        weight = weight * 0.453592                          # Convert lbs to kg
-    
-    if height_unit == 'feet and inches':
-        while True:
-            try:
-                feet = int(input("Enter feet: "))
-                inches = int(input("Enter inches: "))
-                if feet < 0 or inches < 0:
-                    print("Feet and inches must be non-negative.")
-                    continue
-                height = (feet * 30.48) + (inches * 2.54)   # Convert feet and inches to cm
-                break
-            except ValueError:
-                print("Invalid input. Please enter numeric values for feet and inches.")
-    
-    return weight, height
+def get_valid_input(prompt, valid_options=None, value_type=str, condition=None):
+    while True:
+        try:
+            user_input = value_type(input(prompt).strip().lower())
+            if valid_options and user_input not in valid_options:
+                print(f"Invalid input. Please enter one of the following: {', '.join(valid_options)}")
+                continue
+            if condition and not condition(user_input):
+                print("Invalid input. Please enter a valid value.")
+                continue
+            return user_input
+        except ValueError:
+            print(f"Invalid input. Expected a {value_type.__name__}.")
 
-# User input -- soon to be put into function.
-while True:
-    gender = input("Enter gender (male/female): ").strip().lower()
-    if gender in ['male', 'female']:
-        break
-    print("Invalid gender. Please enter 'male' or 'female'.")
+def is_positive(value):
+    return value > 0
 
-while True:
-    weight_unit = input("Enter weight unit (kg/lbs): ").strip().lower()
-    if weight_unit in ['kg', 'lbs']:
-        break
-    print("Invalid weight unit. Please enter 'kg' or 'lbs'.")
+def get_user_inputs():
+    gender = get_valid_input("Enter gender (male/female): ", ['male', 'female'])
+    weight = get_valid_input("Enter weight (kg): ", value_type=float, condition=is_positive)
+    height = get_valid_input("Enter height (cm): ", value_type=float, condition=is_positive)
+    age = get_valid_input("Enter age (years): ", value_type=int, condition=is_positive)
+    activity_level = get_valid_input("Enter activity level (little, light, moderate, very active, extra active): ",
+                                    ['little', 'light', 'moderate', 'very active', 'extra active'])
+    return gender, weight, height, age, activity_level
 
-while True:
-    height_unit = input("Enter height unit (cm/feet and inches): ").strip().lower()
-    if height_unit in ['cm', 'feet and inches']:
-        break
-    print("Invalid height unit. Please enter 'cm' or 'feet and inches'.")
+def main():
+    gender, weight, height, age, activity_level = get_user_inputs()
+    bmr = calculate_bmr(gender, weight, height, age)
+    if bmr is None:
+        print("Invalid gender input.")
+    else:
+        total_calories = calculate_total_calories(bmr, activity_level)
+        print(f"Your BMR is: {bmr:.2f} kcal/day")
+        print(f"Your total daily calorie needs are: {total_calories:.2f} kcal/day")
 
-while True:
-    try:
-        weight = float(input(f"Enter weight ({weight_unit}): "))
-        if weight > 0:
-            break
-        print("Weight must be a positive number.")
-    except ValueError:
-        print("Invalid input. Please enter a numeric value for weight.")
-
-while True:
-    try:
-        height = float(input(f"Enter height ({height_unit}): "))
-        if height > 0:
-            break
-        print("Height must be a positive number.")
-    except ValueError:
-        print("Invalid input. Please enter a numeric value for height.")
-
-while True:
-    try:
-        age = int(input("Enter age (years): "))
-        if age > 0:
-            break
-        print("Age must be a positive integer.")
-    except ValueError:
-        print("Invalid input. Please enter a numeric value for age.")
-
-while True:
-    activity_level = input("Enter activity level (little, light, moderate, very active, extra active): ").strip().lower()
-    if activity_level in ['little', 'light', 'moderate', 'very active', 'extra active']:
-        break
-    print("Invalid activity level. Please choose from the given options.")
-
-# Convert to metric if necessary
-try:
-    weight, height = convert_to_metric(weight, height, weight_unit, height_unit)
-except ValueError as e:
-    print(e)
-    exit()
-
-# Calculate BMR -- use all details to calculate BMR rounded.
-bmr = calculate_bmr(gender, weight, height, age)
-if bmr is None:
-    print("Invalid gender input.")
-else:
-    total_calories = calculate_total_calories(bmr, activity_level)
-    print(f"Your BMR is: {bmr:.2f} kcal/day")
-    print(f"Your total daily calorie needs are: {total_calories:.2f} kcal/day")
+if __name__ == "__main__":
+    main()
