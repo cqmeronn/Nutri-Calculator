@@ -10,21 +10,21 @@ def calculate_bmr(gender, weight, height, age):
 
 def calculate_total_calories(bmr, activity_level):
     activity_multipliers = {
-        'little': 1.2,
-        'light': 1.375,
-        'moderate': 1.55,
-        'very active': 1.725,
-        'extra active': 1.9
+        1: 1.2,
+        2: 1.375,
+        3: 1.55,
+        4: 1.725,
+        5: 1.9
     }
     
-    return bmr * activity_multipliers.get(activity_level.lower(), 1.2)
+    return bmr * activity_multipliers.get(activity_level, 1.2)
 
 def get_valid_input(prompt, valid_options=None, value_type=str, condition=None):
     while True:
         try:
             user_input = value_type(input(prompt).strip().lower())
             if valid_options and user_input not in valid_options:
-                print(f"Invalid input. Please enter one of the following: {', '.join(valid_options)}")
+                print(f"Invalid input. Please enter one of the following: {', '.join(map(str, valid_options))}")
                 continue
             if condition and not condition(user_input):
                 print("Invalid input. Please enter a valid value.")
@@ -41,8 +41,16 @@ def get_user_inputs():
     weight = get_valid_input("Enter weight (kg): ", value_type=float, condition=is_positive)
     height = get_valid_input("Enter height (cm): ", value_type=float, condition=is_positive)
     age = get_valid_input("Enter age (years): ", value_type=int, condition=is_positive)
-    activity_level = get_valid_input("Enter activity level (little, light, moderate, very active, extra active): ",
-                                    ['little', 'light', 'moderate', 'very active', 'extra active'])
+    
+    print("Enter activity level:")
+    print("1 - Little/no exercise")
+    print("2 - Light exercise")
+    print("3 - Moderate exercise (3-5 days/wk)")
+    print("4 - Very active (6-7 days/wk)")
+    print("5 - Extra active (very active & physical job)")
+    
+    activity_level = get_valid_input("Choose a number (1-5): ", [1, 2, 3, 4, 5], value_type=int)
+    
     return gender, weight, height, age, activity_level
 
 def main():
