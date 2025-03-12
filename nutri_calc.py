@@ -50,7 +50,7 @@ def get_valid_input(prompt: str, valid_options: Optional[List[int]] = None, valu
                 continue
             return user_input
         except ValueError:
-            print(f"Invalid input. Expected a {value_type.__name__}.")
+            print(f"Sorry, that was an invalid input...")
 
 def is_positive(value: float) -> bool:
     """
@@ -154,6 +154,8 @@ def main() -> None:
             calorie_surpluses = {1: 300, 2: 500, 3: 1100}
             total_calories += calorie_surpluses.get(weight_change, 0)
             print(f"To gain weight, you should consume around {int(round(total_calories, -2))} kcal/day.")
+
+        input("\nPress Enter to exit...")
 
 if __name__ == "__main__":
     main()
