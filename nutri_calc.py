@@ -1,6 +1,15 @@
-"""Calculator to determine user's BMI and nutritional requirements from their height and weight."""
+"""
+Calculator to determine user's BMR and nutritional requirements based on their height, weight, age, and activity level.
+"""
 
-def calculate_bmr(gender, weight, height, age):
+from typing import Optional, Callable, Tuple, Any, List
+
+def calculate_bmr(gender: str, weight: float, height: float, age: int) -> float:
+    """
+    Calculates the Basal Metabolic Rate (BMR) based on gender, weight, height, and age.
+    Returns the BMR Value as a float.
+    """
+
     if gender.lower() == 'male':
         return 66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age)
     elif gender.lower() == 'female':
@@ -8,7 +17,12 @@ def calculate_bmr(gender, weight, height, age):
     else:
         return None
 
-def calculate_total_calories(bmr, activity_level):
+def calculate_total_calories(bmr: float, activity_level: int) -> int:
+    """
+    Calculates total daily calorie needs based on BMR and activity level.
+    Returns the total kcal requirement per day (rounded) as an int.
+    """
+
     activity_multipliers = {
         1: 1.2,
         2: 1.375,
@@ -19,7 +33,12 @@ def calculate_total_calories(bmr, activity_level):
     
     return round(bmr * activity_multipliers.get(activity_level, 1.2), -2)
 
-def get_valid_input(prompt, valid_options=None, value_type=str, condition=None):
+def get_valid_input(prompt: str, valid_options: Optional[List[int]] = None, value_type: type = str, condition: Optional[Callable[[Any], bool]] = None) -> Any:
+    """
+    Obtains a valid input from the user, including validation.
+    Returns the users input.
+    """
+
     while True:
         try:
             user_input = value_type(input(prompt).strip().lower())
@@ -33,17 +52,32 @@ def get_valid_input(prompt, valid_options=None, value_type=str, condition=None):
         except ValueError:
             print(f"Invalid input. Expected a {value_type.__name__}.")
 
-def is_positive(value):
+def is_positive(value: float) -> bool:
+    """
+    Checks if the given value is positive.
+    Returns true if positive, and false if not as a boolean.
+    """
+
     return value > 0
 
-def convert_to_metric(weight, height, weight_unit, height_unit):
+def convert_to_metric(weight: float, height: float, weight_unit: str, height_unit: str) -> tuple[float, float]:
+    """
+    Converts the weight and height data from imperial to metric if user selects imperial.
+    Returns the converted weight and height (in kg/cm)  as a tuple[float, float].
+    """
+
     if weight_unit == 'lbs':
         weight = weight * 0.453592
     if height_unit == 'inches':
         height = height * 2.54
     return weight, height
 
-def get_user_inputs():
+def get_user_inputs() -> tuple[str, float, float, int, int, int, int | None]:
+    """
+    Collects the users inputs.
+    Returns the users inputs as a tuple.
+    """
+
     unit_system = get_valid_input("Choose unit system (metric/imperial): ", ['metric', 'imperial'])
     weight_unit = 'kg' if unit_system == 'metric' else 'lbs'
     height_unit = 'cm' if unit_system == 'metric' else 'inches'
@@ -98,7 +132,11 @@ def get_user_inputs():
     
     return gender, weight, height, age, activity_level, goal, weight_change
 
-def main():
+def main() -> None:
+    """
+    Main function to execute all necessary functions for calculator.
+    """
+
     gender, weight, height, age, activity_level, goal, weight_change = get_user_inputs()
     bmr = calculate_bmr(gender, weight, height, age)
     if bmr is None:
