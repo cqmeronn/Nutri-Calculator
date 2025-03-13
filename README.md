@@ -1,56 +1,27 @@
-# BMR and Calorie Calculator
+# Nutri Calc
 
-## Description
+Nutri Calc is a project that calculates Basal Metabolic Rate (BMR) and daily calorie needs based on user input. There are two implementations:
 
-This Python script calculates the Basal Metabolic Rate (BMR) and estimates daily calorie needs based on user input. The script runs in interactive mode, asking for user input step by step to determine calorie needs based on activity level and goals.
+- **Python (Terminal):** A command-line version.
+- **Web:** A front-end version with an interactive interface.
 
-## Features
+## Repository Structure
 
-- Supports both **metric** and **imperial** unit systems.
-- Calculates **BMR** based on weight, height, age, and gender.
-- Estimates **daily calorie needs** based on activity level.
-- Provides options for **weight maintenance, loss, or gain.**
-- Validates all inputs and prompts again if invalid values are entered.
+- **calc_for_terminal/**  
+  Contains the terminal-based Python version. See [calc_for_terminal/README.md](calc_for_terminal/README.md) for more details.
+    
+    ![calc_for_terminal_preview](resources/preview_terminal.gif)
 
-## Requirements
 
-- Python 3.7 or higher
+- **calc_for_web/**  
+  Contains the web front-end version (HTML, CSS, JavaScript, and assets). See [calc_for_web/README.md](calc_for_web/README.md) for usage and installation instructions.
 
-## Installation
+    ![calc_for_web_preview](resources/preview_web.gif)
+  
 
-No external dependencies are required. Simply clone the repository or download `nutri_calc.py` and run it with Python.
+## Getting Started
 
-```sh
-python nutri_calc.py
-```
-
-## Usage
-
-### Interactive Mode
-
-Run the script without arguments to enter values manually:
+Clone the repository and choose the version you want to run:
 
 ```sh
-python nutri_calc.py
-```
-
-The script will ask for:
-
-1. **Unit system** (metric/imperial)
-2. **Gender** (male/female)
-3. **Weight**
-4. **Height**
-5. **Age**
-6. **Activity level**
-7. **Goal** (maintain, lose, gain weight)
-8. **Weight change goal** (for weight loss/gain)
-
-### Handling Invalid Inputs
-
-If an invalid value is entered, the script will notify the user and ask for the input again.
-
-![Invalid Input Example](resources/error.gif)
-
-## Example Output
-
-![Full Result Example](resources/example_result.gif)
+git clone https://github.com/cqmeronn/Nutri-Calculator-and-Tracker.git
