@@ -58,7 +58,7 @@ function calculate() {
         errorMessage.classList.add('visible-error');
         formContainer.classList.add('shake');
 
-        // Remove shake animation after it completes
+
         setTimeout(() => {
             formContainer.classList.remove('shake');
         }, 500);
@@ -104,10 +104,10 @@ function calculateBMR(gender, weight, height, age, activityLevel, goal, weightCh
 
     let totalCalories = Math.round(bmr * activityMultipliers[activityLevel]);
 
-    if (goal === 2) { // Weight loss
+    if (goal === 2) {
         const calorieDeficits = { 1: 300, 2: 500, 3: 1100 };
         totalCalories -= calorieDeficits[weightChange];
-    } else if (goal === 3) { // Weight gain
+    } else if (goal === 3) {
         const calorieSurpluses = { 1: 300, 2: 500, 3: 1100 };
         totalCalories += calorieSurpluses[weightChange];
     }
@@ -119,8 +119,8 @@ function displayResults(bmr, totalCalories) {
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = `
         <h2>Results</h2>
-        <p>Your BMR is: ${Math.round(bmr)} kcal/day</p>
-        <p>Your total daily calorie needs are: ${totalCalories} kcal/day</p>
+        <p>Your Basic Metabolic Rate is: <strong>${Math.round(bmr)} kcal/day</strong></p>
+        <p>Your total daily calorie needs are: <strong>${totalCalories} kcal/day</strong></p>
     `;
 }
 

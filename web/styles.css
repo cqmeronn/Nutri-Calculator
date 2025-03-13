@@ -1,20 +1,36 @@
 body {
     font-family: Helvetica, Arial, sans-serif;
-    background-color: #e0f7fa;
+    background-image: url('./resources/images/background.jpg');
+    background-size: 820px 580px;
+    background-repeat: repeat;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    overflow: auto;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(7%);
+    z-index: -1;
 }
 
 .container {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 320px;
     text-align: center;
+    position: relative;
 }
 
 h1 {
@@ -27,14 +43,14 @@ form {
 }
 
 label {
-    margin-top: 25px; /* Increased margin for more spacing */
+    margin-top: 25px;
     margin-bottom: 5px;
     color: #455a64;
     text-align: left;
 }
 
 input, select, button {
-    margin-bottom: 20px; /* Increased bottom margin for more spacing */
+    margin-bottom: 20px;
     padding: 12px;
     width: 100%;
     box-sizing: border-box;
@@ -44,7 +60,7 @@ input, select, button {
 }
 
 input.error, select.error {
-    border: 2px solid #d32f2f; /* Red border for error highlight */
+    border: 2px solid #d32f2f;
 }
 
 button {
