@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: #e0f7fa;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,15 +9,16 @@ body {
 }
 
 .container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 320px;
 }
 
 h1 {
     text-align: center;
+    color: #00796b;
 }
 
 form {
@@ -26,27 +27,52 @@ form {
 }
 
 label {
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #455a64;
+}
+
+input, select, button {
+    margin-bottom: 15px;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #b0bec5;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input, select {
+    color: #455a64;
 }
 
 button {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
+    background-color: #00796b;
+    color: #ffffff;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #004d40;
 }
 
 #results {
     margin-top: 20px;
+    color: #455a64;
 }
 
-#weight-change-container {
-    display: none;
+.hidden {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.visible {
+    opacity: 1;
+    max-height: 1500px;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
 }

@@ -12,51 +12,54 @@
         <form id="calculator-form">
             <label for="unit-system">Choose unit system:</label>
             <select id="unit-system">
+                <option value="">Select a unit system</option>
                 <option value="metric">Metric</option>
                 <option value="imperial">Imperial</option>
             </select>
 
-            <label for="gender">Gender:</label>
-            <select id="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
-
-            <label for="weight">Weight (kg):</label>
-            <input type="number" id="weight" placeholder="Weight">
-
-            <label for="height">Height (cm):</label>
-            <input type="number" id="height" placeholder="Height">
-
-            <label for="age">Age:</label>
-            <input type="number" id="age" placeholder="Age">
-
-            <label for="activity-level">Activity Level:</label>
-            <select id="activity-level">
-                <option value="1">Little/no exercise</option>
-                <option value="2">Light exercise</option>
-                <option value="3">Moderate exercise (3-5 days/wk)</option>
-                <option value="4">Very active (6-7 days/wk)</option>
-                <option value="5">Extra active (very active & physical job)</option>
-            </select>
-
-            <label for="goal">Goal:</label>
-            <select id="goal">
-                <option value="1">Maintain weight</option>
-                <option value="2">Lose weight</option>
-                <option value="3">Gain weight</option>
-            </select>
-
-            <div id="weight-change-container">
-                <label for="weight-change">Weight Change Goal:</label>
-                <select id="weight-change">
-                    <option value="1">0.25 kg (0.5 lbs)/week (mild change)</option>
-                    <option value="2">0.5 kg (1 lbs)/week (moderate change)</option>
-                    <option value="3">1 kg (2.2 lbs)/week (aggressive change)</option>
+            <div id="form-container" class="hidden">
+                <label for="gender">Gender:</label>
+                <select id="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
                 </select>
-            </div>
 
-            <button type="button" onclick="calculate()">Calculate</button>
+                <label for="weight">Weight:</label>
+                <input type="number" id="weight" placeholder="Weight">
+
+                <label for="height">Height:</label>
+                <input type="number" id="height" placeholder="Height">
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" placeholder="Age">
+
+                <label for="activity-level">Activity Level:</label>
+                <select id="activity-level">
+                    <option value="1">Little/no exercise</option>
+                    <option value="2">Light exercise</option>
+                    <option value="3">Moderate exercise (3-5 days/wk)</option>
+                    <option value="4">Very active (6-7 days/wk)</option>
+                    <option value="5">Extra active (very active & physical job)</option>
+                </select>
+
+                <label for="goal">Goal:</label>
+                <select id="goal">
+                    <option value="1">Maintain weight</option>
+                    <option value="2">Lose weight</option>
+                    <option value="3">Gain weight</option>
+                </select>
+
+                <div id="weight-change-container" class="hidden">
+                    <label for="weight-change">Weight Change Goal:</label>
+                    <select id="weight-change">
+                        <option value="1">0.25 kg (0.5 lbs)/week (mild change)</option>
+                        <option value="2">0.5 kg (1 lbs)/week (moderate change)</option>
+                        <option value="3">1 kg (2.2 lbs)/week (aggressive change)</option>
+                    </select>
+                </div>
+
+                <button type="button" onclick="calculate()">Calculate</button>
+            </div>
         </form>
 
         <div id="results"></div>

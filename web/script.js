@@ -1,8 +1,16 @@
-document.addEventListener('DOMContentLoaded', function() {
-    updateUnitLabels();
+document.getElementById('unit-system').addEventListener('change', function() {
+    const formContainer = document.getElementById('form-container');
+    if (this.value) {
+        formContainer.classList.remove('hidden');
+        formContainer.classList.add('visible');
+        updateUnitLabels();
+    } else {
+        formContainer.classList.add('hidden');
+        formContainer.classList.remove('visible');
+    }
 });
 
-document.getElementById('unit-system').addEventListener('change', function() {
+document.addEventListener('DOMContentLoaded', function() {
     updateUnitLabels();
 });
 
@@ -14,7 +22,7 @@ function updateUnitLabels() {
     if (unitSystem === 'metric') {
         weightLabel.textContent = 'Weight (kg):';
         heightLabel.textContent = 'Height (cm):';
-    } else {
+    } else if (unitSystem === 'imperial') {
         weightLabel.textContent = 'Weight (lbs):';
         heightLabel.textContent = 'Height (inches):';
     }
@@ -84,8 +92,10 @@ function displayResults(bmr, totalCalories) {
 document.getElementById('goal').addEventListener('change', function() {
     const weightChangeContainer = document.getElementById('weight-change-container');
     if (this.value === '2' || this.value === '3') {
-        weightChangeContainer.style.display = 'block';
+        weightChangeContainer.classList.remove('hidden');
+        weightChangeContainer.classList.add('visible');
     } else {
-        weightChangeContainer.style.display = 'none';
+        weightChangeContainer.classList.add('hidden');
+        weightChangeContainer.classList.remove('visible');
     }
 });
