@@ -18,6 +18,7 @@ document.getElementById('unit-system').addEventListener('change', function() {
     const unitSystem = document.getElementById('unit-system').value;
     const weightLabel = document.querySelector('label[for="weight"]');
     const heightLabel = document.querySelector('label[for="height"]');
+  
     if (unitSystem === 'metric') {
       weightLabel.textContent = 'Weight (kg):';
       heightLabel.textContent = 'Height (cm):';
@@ -35,7 +36,11 @@ document.getElementById('unit-system').addEventListener('change', function() {
     const age = parseInt(document.getElementById('age').value);
     const activityLevel = parseInt(document.getElementById('activity-level').value);
     const goal = parseInt(document.getElementById('goal').value);
+  
     let weightChange = null;
+    if (goal === 2 || goal === 3) {
+      weightChange = parseInt(document.getElementById('weight-change').value);
+    }
   
     const errorMessage = document.getElementById('error-message');
     const formContainer = document.getElementById('form-container');
@@ -68,10 +73,6 @@ document.getElementById('unit-system').addEventListener('change', function() {
       return;
     }
   
-    if (goal === 2 || goal === 3) {
-      weightChange = parseInt(document.getElementById('weight-change').value);
-    }
-  
     if (unitSystem === 'imperial') {
       const weightInKg = weight * 0.453592;
       const heightInCm = height * 2.54;
@@ -79,6 +80,10 @@ document.getElementById('unit-system').addEventListener('change', function() {
     } else {
       calculateBMR(gender, weight, height, age, activityLevel, goal, weightChange);
     }
+  
+    const formWrapper = document.getElementById('form-wrapper');
+    formWrapper.classList.remove('expanded');
+    formWrapper.classList.add('collapsed');
   }
   
   function calculateBMR(gender, weight, height, age, activityLevel, goal, weightChange) {
@@ -100,11 +105,11 @@ document.getElementById('unit-system').addEventListener('change', function() {
     let totalCalories = Math.round(bmr * activityMultipliers[activityLevel]);
   
     if (goal === 2) {
-      const calorieDeficits = { 1: 300, 2: 500, 3: 1100 };
-      totalCalories -= calorieDeficits[weightChange];
+      const deficits = { 1: 300, 2: 500, 3: 1100 };
+      totalCalories -= deficits[weightChange];
     } else if (goal === 3) {
-      const calorieSurpluses = { 1: 300, 2: 500, 3: 1100 };
-      totalCalories += calorieSurpluses[weightChange];
+      const surpluses = { 1: 300, 2: 500, 3: 1100 };
+      totalCalories += surpluses[weightChange];
     }
   
     totalCalories = Math.round(totalCalories / 100) * 100;
@@ -115,11 +120,41 @@ document.getElementById('unit-system').addEventListener('change', function() {
   function displayResults(bmr, totalCalories) {
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = `
-      <h2>Results</h2>
-      <p>Your Basic Metabolic Rate is: <strong>${Math.round(bmr)} kcal/day</strong></p>
-      <p>Your total daily calorie needs are: <strong>${totalCalories} kcal/day</strong></p>
+      <h2 style="margin-bottom: 1rem;">Here are your results!</h2>
+      <p style="margin-bottom: 1rem;">
+        Your Basic Metabolic Rate is: <strong>${Math.round(bmr)} kcal/day</strong>
+      </p>
+      <p style="margin-bottom: 1rem;">
+        Your total daily calorie needs are: <strong>${totalCalories} kcal/day</strong>
+      </p>
+  
+      <!-- Add the "Start Again!" button -->
+      <button type="button" onclick="startAgain()" style="padding: 10px 20px; margin-top: 1rem;">
+        Start Again!
+      </button>
     `;
   }
+  
+  function startAgain() {
+    document.getElementById('results').innerHTML = '';
+  
+    document.getElementById('calculator-form').reset();
+  
+    const errorMessage = document.getElementById('error-message');
+    errorMessage.classList.add('hidden');
+    errorMessage.classList.remove('visible-error');
+  
+    document.getElementById('form-container').classList.remove('visible');
+    document.getElementById('form-container').classList.add('hidden');
+    document.getElementById('unit-system').value = '';
+  
+    const formWrapper = document.getElementById('form-wrapper');
+    formWrapper.classList.remove('collapsed');
+    formWrapper.classList.add('expanded');
+  }
+  
+
+  
   
   document.getElementById('goal').addEventListener('change', function() {
     const weightChangeContainer = document.getElementById('weight-change-container');
@@ -127,8 +162,8 @@ document.getElementById('unit-system').addEventListener('change', function() {
       weightChangeContainer.classList.remove('hidden');
       weightChangeContainer.classList.add('visible');
     } else {
-      weightChangeContainer.classList.add('hidden');
       weightChangeContainer.classList.remove('visible');
+      weightChangeContainer.classList.add('hidden');
     }
   });
   
