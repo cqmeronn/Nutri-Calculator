@@ -1,3 +1,17 @@
+document.getElementById('unit-system').addEventListener('change', function() {
+    const unitSystem = this.value;
+    const weightLabel = document.querySelector('label[for="weight"]');
+    const heightLabel = document.querySelector('label[for="height"]');
+
+    if (unitSystem === 'metric') {
+        weightLabel.textContent = 'Weight (kg):';
+        heightLabel.textContent = 'Height (cm):';
+    } else {
+        weightLabel.textContent = 'Weight (lbs):';
+        heightLabel.textContent = 'Height (inches):';
+    }
+});
+
 function calculate() {
     const unitSystem = document.getElementById('unit-system').value;
     const gender = document.getElementById('gender').value;
