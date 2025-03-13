@@ -38,6 +38,41 @@ function calculate() {
     const goal = parseInt(document.getElementById('goal').value);
     let weightChange = null;
 
+    const errorMessage = document.getElementById('error-message');
+    const formContainer = document.getElementById('form-container');
+
+    const inputs = document.querySelectorAll('#form-container input, #form-container select');
+    let isValid = true;
+
+    inputs.forEach(input => {
+        if (!input.value) {
+            input.classList.add('error');
+            isValid = false;
+        } else {
+            input.classList.remove('error');
+        }
+    });
+
+    if (!unitSystem || !gender || isNaN(weight) || isNaN(height) || isNaN(age) || isNaN(activityLevel) || isNaN(goal)) {
+        errorMessage.classList.remove('hidden');
+        errorMessage.classList.add('visible-error');
+        formContainer.classList.add('shake');
+
+        // Remove shake animation after it completes
+        setTimeout(() => {
+            formContainer.classList.remove('shake');
+        }, 500);
+
+        isValid = false;
+    } else {
+        errorMessage.classList.add('hidden');
+        errorMessage.classList.remove('visible-error');
+    }
+
+    if (!isValid) {
+        return;
+    }
+
     if (goal === 2 || goal === 3) {
         weightChange = parseInt(document.getElementById('weight-change').value);
     }
@@ -69,10 +104,10 @@ function calculateBMR(gender, weight, height, age, activityLevel, goal, weightCh
 
     let totalCalories = Math.round(bmr * activityMultipliers[activityLevel]);
 
-    if (goal === 2) {
+    if (goal === 2) { // Weight loss
         const calorieDeficits = { 1: 300, 2: 500, 3: 1100 };
         totalCalories -= calorieDeficits[weightChange];
-    } else if (goal === 3) {
+    } else if (goal === 3) { // Weight gain
         const calorieSurpluses = { 1: 300, 2: 500, 3: 1100 };
         totalCalories += calorieSurpluses[weightChange];
     }

@@ -14,10 +14,10 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 320px;
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
     color: #00796b;
 }
 
@@ -27,13 +27,14 @@ form {
 }
 
 label {
-    margin-top: 15px;
+    margin-top: 25px; /* Increased margin for more spacing */
     margin-bottom: 5px;
     color: #455a64;
+    text-align: left;
 }
 
 input, select, button {
-    margin-bottom: 15px;
+    margin-bottom: 20px; /* Increased bottom margin for more spacing */
     padding: 12px;
     width: 100%;
     box-sizing: border-box;
@@ -42,8 +43,8 @@ input, select, button {
     font-size: 16px;
 }
 
-input, select {
-    color: #455a64;
+input.error, select.error {
+    border: 2px solid #d32f2f; /* Red border for error highlight */
 }
 
 button {
@@ -58,9 +59,22 @@ button:hover {
     background-color: #004d40;
 }
 
-#results {
+#results, #error-message {
     margin-top: 20px;
-    color: #455a64;
+    text-align: center;
+}
+
+.error-box {
+    background-color: #ffcdd2;
+    color: #d32f2f;
+    padding: 10px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.visible-error {
+    opacity: 1;
 }
 
 .hidden {
@@ -75,4 +89,16 @@ button:hover {
     max-height: 1500px;
     overflow: hidden;
     transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
 }
