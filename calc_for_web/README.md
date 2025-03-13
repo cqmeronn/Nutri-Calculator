@@ -28,13 +28,6 @@ This is a simple web-based **BMI and Nutritional Calculator** that helps users d
 ![Results](resources/readme/results_sc.jpg)
 
 
-## 🛠️ Technologies Used
-
-- **HTML5** – Structure of the application
-- **CSS3** – Styling and animations
-- **JavaScript (Vanilla)** – Logic and calculations
-
-
 ## 📄 How to Use
 
 1. Open `index.html` in a web browser.
