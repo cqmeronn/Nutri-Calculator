@@ -2,6 +2,7 @@
 
 Nutri Calc is a project that calculates Basal Metabolic Rate (BMR) and daily calorie needs based on user input. There are two implementations:
 
+```
 NUTRITION/
 ├── README.md               # Overall project description, summary, and navigation
 ├── calc_for_terminal/
@@ -17,6 +18,7 @@ NUTRITION/
 │   ├── resources/          # Assets for the README, and images for the web version.
 │
 └── resources/              # General resources for documentation and previews
+```
 
 ## Repository Structure
 
