@@ -1,29 +1,25 @@
-body {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+
+  body {
     font-family: Helvetica, Arial, sans-serif;
     background-image: url('./resources/images/background.jpg');
     background-size: 820px 580px;
     background-repeat: repeat;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start;
+    min-height: 100vh;
     margin: 0;
-    overflow: auto;
-}
-
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(7%);
-    z-index: -1;
-}
-
-.container {
+    overflow-y: auto;
+    padding-top: 20px;
+  }
+  
+  .container {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 30px;
     border-radius: 10px;
@@ -31,25 +27,25 @@ body::before {
     width: 320px;
     text-align: center;
     position: relative;
-}
-
-h1 {
-    color: #00796b;
-}
-
-form {
+  }
+  
+  h1 {
+    color: #58568f;
+  }
+  
+  form {
     display: flex;
     flex-direction: column;
-}
-
-label {
+  }
+  
+  label {
     margin-top: 25px;
     margin-bottom: 5px;
-    color: #455a64;
+    color: #58568f;
     text-align: left;
-}
-
-input, select, button {
+  }
+  
+  input, select, button {
     margin-bottom: 20px;
     padding: 12px;
     width: 100%;
@@ -57,64 +53,66 @@ input, select, button {
     border: 1px solid #b0bec5;
     border-radius: 4px;
     font-size: 16px;
-}
-
-input.error, select.error {
+  }
+  
+  input.error, select.error {
     border: 2px solid #d32f2f;
-}
-
-button {
-    background-color: #00796b;
+  }
+  
+  button {
+    background-color: #58568f;
     color: #ffffff;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #004d40;
-}
-
-#results, #error-message {
+  }
+  
+  button:hover {
+    background-color: #58568f;
+  }
+  
+  #results, #error-message {
     margin-top: 20px;
     text-align: center;
-}
-
-.error-box {
+  }
+  
+  .error-box {
     background-color: #ffcdd2;
     color: #d32f2f;
     padding: 10px;
     border-radius: 4px;
     opacity: 0;
     transition: opacity 0.5s ease;
-}
-
-.visible-error {
+  }
+  
+  .visible-error {
     opacity: 1;
-}
+  }
+  
 
-.hidden {
+  .hidden {
     opacity: 0;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease, opacity 0.5s ease;
-}
-
-.visible {
+  }
+  
+  .visible {
     opacity: 1;
     max-height: 1500px;
     overflow: hidden;
     transition: max-height 0.5s ease, opacity 0.5s ease;
-}
-
-.shake {
+  }
+  
+  .shake {
     animation: shake 0.5s ease-in-out;
-}
-
-@keyframes shake {
+  }
+  
+  @keyframes shake {
     0% { transform: translateX(0); }
     25% { transform: translateX(-5px); }
     50% { transform: translateX(5px); }
     75% { transform: translateX(-5px); }
     100% { transform: translateX(0); }
-}
+  }
+  
