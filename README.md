@@ -24,4 +24,4 @@ Nutri Calc is a project that calculates Basal Metabolic Rate (BMR) and daily cal
 Clone the repository and choose the version you want to run:
 
 ```sh
-git clone https://github.com/cqmeronn/Nutri-Calculator-and-Tracker.git
+git clone https://github.com/cqmeronn/Nutri-Calculator.git
