@@ -1,5 +1,13 @@
+document.addEventListener('DOMContentLoaded', function() {
+    updateUnitLabels();
+});
+
 document.getElementById('unit-system').addEventListener('change', function() {
-    const unitSystem = this.value;
+    updateUnitLabels();
+});
+
+function updateUnitLabels() {
+    const unitSystem = document.getElementById('unit-system').value;
     const weightLabel = document.querySelector('label[for="weight"]');
     const heightLabel = document.querySelector('label[for="height"]');
 
@@ -10,7 +18,7 @@ document.getElementById('unit-system').addEventListener('change', function() {
         weightLabel.textContent = 'Weight (lbs):';
         heightLabel.textContent = 'Height (inches):';
     }
-});
+}
 
 function calculate() {
     const unitSystem = document.getElementById('unit-system').value;
@@ -27,7 +35,6 @@ function calculate() {
     }
 
     if (unitSystem === 'imperial') {
-        // Convert weight to kg and height to cm
         const weightInKg = weight * 0.453592;
         const heightInCm = height * 2.54;
         calculateBMR(gender, weightInKg, heightInCm, age, activityLevel, goal, weightChange);
@@ -54,10 +61,10 @@ function calculateBMR(gender, weight, height, age, activityLevel, goal, weightCh
 
     let totalCalories = Math.round(bmr * activityMultipliers[activityLevel]);
 
-    if (goal === 2) { // Weight loss
+    if (goal === 2) {
         const calorieDeficits = { 1: 300, 2: 500, 3: 1100 };
         totalCalories -= calorieDeficits[weightChange];
-    } else if (goal === 3) { // Weight gain
+    } else if (goal === 3) {
         const calorieSurpluses = { 1: 300, 2: 500, 3: 1100 };
         totalCalories += calorieSurpluses[weightChange];
     }
