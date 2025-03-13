@@ -4,7 +4,7 @@
 
 This Python script calculates the Basal Metabolic Rate (BMR) and estimates daily calorie needs based on user input. The script runs in interactive mode, asking for user input step by step to determine calorie needs based on activity level and goals.
 
-## Features
+## 🚀 Features
 
 - Supports both **metric** and **imperial** unit systems.
 - Calculates **BMR** based on weight, height, age, and gender.
@@ -16,17 +16,13 @@ This Python script calculates the Basal Metabolic Rate (BMR) and estimates daily
 
 - Python 3.7 or higher
 
-## Installation
+## 📄 How to Use
 
 No external dependencies are required. Simply clone the repository or download `nutri_calc.py` and run it with Python.
 
 ```sh
 python nutri_calc.py
 ```
-
-## Usage
-
-### Interactive Mode
 
 Run the script without arguments to enter values manually:
 
